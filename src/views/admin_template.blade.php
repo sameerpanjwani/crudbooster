@@ -26,7 +26,6 @@
     @endif
 
     <link rel='stylesheet' href='{{asset("vendor/crudbooster/assets/css/main.css").'?r='.time()}}'/>
-    <link href="//www.fuelcdn.com/fuelux/3.16.6/css/fuelux.min.css" rel="stylesheet">
 
     <!-- load css -->
     <style type="text/css">
@@ -83,7 +82,7 @@
 
     @stack('head')
 </head>
-<body class="fuelux skin-purple @php echo (Session::get('theme_color'))?:'skin-blue'; echo ' '; echo config('crudbooster.ADMIN_LAYOUT'); @endphp {{($sidebar_mode)?:''}}">
+<body class="skin-purple @php echo (Session::get('theme_color'))?:'skin-blue'; echo ' '; echo config('crudbooster.ADMIN_LAYOUT'); @endphp {{($sidebar_mode)?:''}}">
 <div id='app' class="wrapper">
 
     <!-- Header -->
@@ -216,7 +215,6 @@
 </script>
 <script src="https://bookings.prakashroadlines.com/vendor/crudbooster/assets/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://bookings.prakashroadlines.com/vendor/crudbooster/assets/sweetalert/dist/sweetalert.css">
-<script src="https://bookings.prakashroadlines.com/js/crudbooster/vendor/fuelux.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
