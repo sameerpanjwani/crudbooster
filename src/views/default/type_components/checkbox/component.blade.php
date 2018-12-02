@@ -25,7 +25,7 @@
                 ?>
                 <div class="checkbox {{$disabled}}">
                     <label>
-                        <input type="checkbox" {{$disabled}} {{$checked}} name="{{$name}}[]" value="{{$val}}"> {{$label}}
+                        <input type="checkbox" {{$disabled}} {{$checked}} name="{{$name}}[]" value="{{$val}}" data-validation="{{$required}}"> {{$label}}
                     </label>
                 </div>
             @endforeach
