@@ -26,6 +26,7 @@
     @endif
 
     <link rel='stylesheet' href='{{asset("vendor/crudbooster/assets/css/main.css").'?r='.time()}}'/>
+    <link href="//www.fuelcdn.com/fuelux/3.16.6/css/fuelux.min.css" rel="stylesheet">
 
     <!-- load css -->
     <style type="text/css">
@@ -82,7 +83,7 @@
 
     @stack('head')
 </head>
-<body class="@php echo (Session::get('theme_color'))?:'skin-blue'; echo ' '; echo config('crudbooster.ADMIN_LAYOUT'); @endphp {{($sidebar_mode)?:''}}">
+<body class="fuelux skin-purple @php echo (Session::get('theme_color'))?:'skin-blue'; echo ' '; echo config('crudbooster.ADMIN_LAYOUT'); @endphp {{($sidebar_mode)?:''}}">
 <div id='app' class="wrapper">
 
     <!-- Header -->
@@ -213,6 +214,46 @@
         {!! $script_js !!}
     @endif
 </script>
+<script src="https://bookings.prakashroadlines.com/vendor/crudbooster/assets/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://bookings.prakashroadlines.com/vendor/crudbooster/assets/sweetalert/dist/sweetalert.css">
+<script src="https://bookings.prakashroadlines.com/js/crudbooster/vendor/fuelux.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+    <script>
+        $.validate({
+            lang: 'en'
+        });
+
+
+
+    $(window).load(function () {
+        $("#save_button_more").removeAttr('disabled');
+        $("#save_button").removeAttr('disabled');
+    });
+
+</script>
+@if( Request::segment(3) == "dealer_details")
+<style>
+
+    table{
+            table-layout: fixed !important;
+    width: 2400px !important;
+    }
+</style>
+@endif
+
+@if(Request::segment(4) == "add" ||  Request::segment(4) == "edit")
+<style>
+
+    table{
+            table-layout: auto !important;
+    width: 100% !important;
+    }
+</style>
+
+@endif
 
 @stack('bottom')
 
