@@ -7,7 +7,7 @@
 
     <div class="{{$col_width?:'col-sm-10'}}">
         <input type='number' step="{{($form['step'])?:'1'}}" title="{{$form['label']}}"
-               {{$required}} {{$readonly}} {!!$placeholder!!} {{$disabled}} {{$validation['min']?"min=".$validation['min']:""}} {{$validation['max']?"max=".$validation['max']:""}} class='form-control'
+               data-validation="{{$required}}" {{$readonly}} {!!$placeholder!!} {{$disabled}} {{$validation['min']?"min=".$validation['min']:""}} {{$validation['max']?"max=".$validation['max']:""}} class='form-control'
                name="{{$name}}" id="{{$name}}" value='{{$value}}'/>
         <div class="text-danger">{!! $errors->first($name)?"<i class='fa fa-info-circle'></i> ".$errors->first($name):"" !!}</div>
         <p class='help-block'>{{ @$form['help'] }}</p>
