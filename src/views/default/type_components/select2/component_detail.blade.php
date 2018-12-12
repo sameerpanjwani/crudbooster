@@ -2,9 +2,10 @@
 $datatable = $form['datatable'];
 if ($datatable && ! $form['relationship_table']) {
     $datatable = explode(',', $datatable);
+    $primary_key = isset($form['primary_key']) ? $form['primary_key'] : 'id';
     $table = $datatable[0];
     $field = $datatable[1];
-    echo CRUDBooster::first($table, ['id' => $value])->$field;
+    echo CRUDBooster::first($table, [$primary_key => $value])->$field;
 }
 
 if ($datatable && $form['relationship_table']) {
