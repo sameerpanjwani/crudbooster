@@ -51,46 +51,46 @@
     <table id='table_dashboard' class="table table-hover table-striped table-bordered">
         <thead>
         <tr class="active">
-            <?php if($button_bulk_action):?>
+			<?php if($button_bulk_action):?>
             <th width='3%'><input type='checkbox' id='checkall'/></th>
-            <?php endif;?>
-            <?php if($show_numbering):?>
+			<?php endif;?>
+			<?php if($show_numbering):?>
             <th width="1%">{{ trans('crudbooster.no') }}</th>
-            <?php endif;?>
-            <?php
-            foreach ($columns as $col) {
-                if ($col['visible'] === FALSE) continue;
+			<?php endif;?>
+			<?php
+			foreach ($columns as $col) {
+				if ($col['visible'] === FALSE) continue;
 
-                $sort_column = Request::get('filter_column');
-                $colname = $col['label'];
-                $name = $col['name'];
-                $field = $col['field_with'];
-                $width = ($col['width']) ?: "auto";
-                $mainpath = trim(CRUDBooster::mainpath(), '/').$build_query;
-                echo "<th width='$width'>";
-                if (isset($sort_column[$field])) {
-                    switch ($sort_column[$field]['sorting']) {
-                        case 'asc':
-                            $url = CRUDBooster::urlFilterColumn($field, 'sorting', 'desc');
-                            echo "<a href='$url' title='Click to sort descending'>$colname &nbsp; <i class='fa fa-sort-desc'></i></a>";
-                            break;
-                        case 'desc':
-                            $url = CRUDBooster::urlFilterColumn($field, 'sorting', 'asc');
-                            echo "<a href='$url' title='Click to sort ascending'>$colname &nbsp; <i class='fa fa-sort-asc'></i></a>";
-                            break;
-                        default:
-                            $url = CRUDBooster::urlFilterColumn($field, 'sorting', 'asc');
-                            echo "<a href='$url' title='Click to sort ascending'>$colname &nbsp; <i class='fa fa-sort'></i></a>";
-                            break;
-                    }
-                } else {
-                    $url = CRUDBooster::urlFilterColumn($field, 'sorting', 'asc');
-                    echo "<a href='$url' title='Click to sort ascending'>$colname &nbsp; <i class='fa fa-sort'></i></a>";
-                }
+				$sort_column = Request::get('filter_column');
+				$colname = $col['label'];
+				$name = $col['name'];
+				$field = $col['field_with'];
+				$width = ($col['width']) ?: "auto";
+				$mainpath = trim(CRUDBooster::mainpath(), '/').$build_query;
+				echo "<th width='$width'>";
+				if (isset($sort_column[$field])) {
+					switch ($sort_column[$field]['sorting']) {
+						case 'asc':
+							$url = CRUDBooster::urlFilterColumn($field, 'sorting', 'desc');
+							echo "<a href='$url' title='Click to sort descending'>$colname &nbsp; <i class='fa fa-sort-desc'></i></a>";
+							break;
+						case 'desc':
+							$url = CRUDBooster::urlFilterColumn($field, 'sorting', 'asc');
+							echo "<a href='$url' title='Click to sort ascending'>$colname &nbsp; <i class='fa fa-sort-asc'></i></a>";
+							break;
+						default:
+							$url = CRUDBooster::urlFilterColumn($field, 'sorting', 'asc');
+							echo "<a href='$url' title='Click to sort ascending'>$colname &nbsp; <i class='fa fa-sort'></i></a>";
+							break;
+					}
+				} else {
+					$url = CRUDBooster::urlFilterColumn($field, 'sorting', 'asc');
+					echo "<a href='$url' title='Click to sort ascending'>$colname &nbsp; <i class='fa fa-sort'></i></a>";
+				}
 
-                echo "</th>";
-            }
-            ?>
+				echo "</th>";
+			}
+			?>
 
             @if($button_table_action)
                 @if(CRUDBooster::isUpdate() || CRUDBooster::isDelete() || CRUDBooster::isRead())
@@ -102,13 +102,13 @@
         <tbody>
         @if(count($result)==0)
             <tr class='warning'>
-                <?php if($button_bulk_action && $show_numbering):?>
+				<?php if($button_bulk_action && $show_numbering):?>
                 <td colspan='{{count($columns)+3}}' align="center">
-                <?php elseif( ($button_bulk_action && ! $show_numbering) || (! $button_bulk_action && $show_numbering) ):?>
+				<?php elseif( ($button_bulk_action && ! $show_numbering) || (! $button_bulk_action && $show_numbering) ):?>
                 <td colspan='{{count($columns)+2}}' align="center">
-                <?php else:?>
+				<?php else:?>
                 <td colspan='{{count($columns)+1}}' align="center">
-                    <?php endif;?>
+					<?php endif;?>
 
                     <i class='fa fa-search'></i> {{trans("crudbooster.table_data_not_found")}}
                 </td>
@@ -118,22 +118,22 @@
         @foreach($html_contents['html'] as $i=>$hc)
 
             @if($table_row_color)
-                <?php $tr_color = NULL;?>
+				<?php $tr_color = NULL;?>
                 @foreach($table_row_color as $trc)
-                    <?php
-                    $query = $trc['condition'];
-                    $color = $trc['color'];
-                    $row = $html_contents['data'][$i];
-                    foreach ($row as $key => $val) {
-                        $query = str_replace("[".$key."]", '"'.$val.'"', $query);
-                    }
+					<?php
+					$query = $trc['condition'];
+					$color = $trc['color'];
+					$row = $html_contents['data'][$i];
+					foreach ($row as $key => $val) {
+						$query = str_replace("[".$key."]", '"'.$val.'"', $query);
+					}
 
-                    @eval("if($query) {
+					@eval("if($query) {
                                       \$tr_color = \$color;
                                   }");
-                    ?>
+					?>
                 @endforeach
-                <?php echo "<tr class='$tr_color'>";?>
+				<?php echo "<tr class='$tr_color'>";?>
             @else
                 <tr>
                     @endif
@@ -148,22 +148,22 @@
 
         <tfoot>
         <tr>
-            <?php if($button_bulk_action):?>
+			<?php if($button_bulk_action):?>
             <th>&nbsp;</th>
-            <?php endif;?>
+			<?php endif;?>
 
-            <?php if($show_numbering):?>
+			<?php if($show_numbering):?>
             <th>&nbsp;</th>
-            <?php endif;?>
+			<?php endif;?>
 
-            <?php
-            foreach ($columns as $col) {
-                if ($col['visible'] === FALSE) continue;
-                $colname = $col['label'];
-                $width = ($col['width']) ?: "auto";
-                echo "<th width='$width'>$colname</th>";
-            }
-            ?>
+			<?php
+			foreach ($columns as $col) {
+				if ($col['visible'] === FALSE) continue;
+				$colname = $col['label'];
+				$width = ($col['width']) ?: "auto";
+				echo "<th width='$width'>$colname</th>";
+			}
+			?>
 
             @if($button_table_action)
                 @if(CRUDBooster::isUpdate() || CRUDBooster::isDelete() || CRUDBooster::isRead())
@@ -308,103 +308,138 @@ $total = $result->total();
                     </div>
                     <form method='get' action=''>
                         <div class="modal-body">
-                            <?php foreach($columns as $key => $col):?>
-                            <?php if (isset($col['image']) || isset($col['download']) || $col['visible'] === FALSE) continue;?>
+							<?php foreach($columns as $key => $col):?>
+							<?php
+							$custom_filter = false;
+							if (isset($col['image']) || isset($col['download']) || $col['visible'] === FALSE) {
+								continue;
+							}else{
+								if (isset($col['custom_filter']) && is_array($col['custom_filter'])) {
+									$custom_filter = $col['custom_filter'];
+								}
+							}
+							?>
+                            @if(!$custom_filter)
+                                <div class='form-group'>
 
-                            <div class='form-group'>
+                                    <div class='row-filter-combo row'>
 
-                                <div class='row-filter-combo row'>
+                                        <div class="col-sm-2">
+                                            <strong>{{$col['label']}}</strong>
+                                        </div>
 
-                                    <div class="col-sm-2">
-                                        <strong>{{$col['label']}}</strong>
+                                        <div class='col-sm-3'>
+                                            <select name='filter_column[{{$col["field_with"]}}][type]' data-type='{{$col["type_data"]}}'
+                                                    class="filter-combo form-control">
+                                                <option value=''>** {{trans("crudbooster.filter_select_operator_type")}}</option>
+                                                @if(in_array($col['type_data'],['string','varchar','text','char']))
+
+                                                    <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'like')?"selected":"" }} value='like'>{{trans("crudbooster.filter_like")}}</option> @endif
+                                                @if(in_array($col['type_data'],['string','varchar','text','char']))
+                                                    <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'not like')?"selected":"" }} value='not like'>{{trans("crudbooster.filter_not_like")}}</option>@endif
+
+                                                <option typeallow='all'
+                                                        {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '=')?"selected":"" }} value='='>{{trans("crudbooster.filter_equal_to")}}</option>
+                                                @if(in_array($col['type_data'],['int','integer','double','float','decimal','time']))
+                                                    <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '>=')?"selected":"" }} value='>='>{{trans("crudbooster.filter_greater_than_or_equal")}}</option>@endif
+                                                @if(in_array($col['type_data'],['int','integer','double','float','decimal','time']))
+                                                    <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '<=')?"selected":"" }} value='<='>{{trans("crudbooster.filter_less_than_or_equal")}}</option>@endif
+                                                @if(in_array($col['type_data'],['int','integer','double','float','decimal','time']))
+                                                    <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '<')?"selected":"" }} value='<'>{{trans("crudbooster.filter_less_than")}}</option>@endif
+                                                @if(in_array($col['type_data'],['int','integer','double','float','decimal','time']))
+                                                    <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '>')?"selected":"" }} value='>'>{{trans("crudbooster.filter_greater_than")}}</option>@endif
+                                                <option typeallow='all'
+                                                        {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '!=')?"selected":"" }} value='!='>{{trans("crudbooster.filter_not_equal_to")}}</option>
+                                                <option typeallow='all'
+                                                        {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'in')?"selected":"" }} value='in'>{{trans("crudbooster.filter_in")}}</option>
+                                                <option typeallow='all'
+                                                        {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'not in')?"selected":"" }} value='not in'>{{trans("crudbooster.filter_not_in")}}</option>
+                                                @if(in_array($col['type_data'],['date','time','datetime','int','integer','double','float','decimal','timestamp']))
+                                                    <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'between')?"selected":"" }} value='between'>{{trans("crudbooster.filter_between")}}</option>@endif
+                                                <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'empty')?"selected":"" }} value='empty'>Empty ( or
+                                                    Null)
+                                                </option>
+                                            </select>
+                                        </div><!--END COL_SM_4-->
+
+
+                                        <div class='col-sm-5'>
+                                            <input type='text' class='filter-value form-control'
+                                                   style="{{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'between')?"display:none":"display:block"}}"
+                                                   disabled name='filter_column[{{$col["field_with"]}}][value]'
+                                                   value='{{ (!is_array(CRUDBooster::getValueFilter($col["field_with"])))?CRUDBooster::getValueFilter($col["field_with"]):"" }}'>
+
+                                            <div class='row between-group'
+                                                 style="{{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'between')?"display:block":"display:none" }}">
+                                                <div class='col-sm-6'>
+                                                    <div class='input-group {{ ($col["type_data"] == "time")?"bootstrap-timepicker":"" }}'>
+                                                        <span class="input-group-addon">{{trans("crudbooster.filter_from")}}:</span>
+                                                        <input
+                                                                {{ (CRUDBooster::getTypeFilter($col["field_with"]) != 'between')?"disabled":"" }}
+                                                                type='text'
+                                                                class='filter-value-between form-control {{ (in_array($col["type_data"],["date","datetime","timestamp"]))?"datepicker":"timepicker" }}'
+                                                                readonly placeholder='{{$col["label"]}} {{trans("crudbooster.filter_from")}}'
+                                                                name='filter_column[{{$col["field_with"]}}][value][]' value='<?php
+														$value = CRUDBooster::getValueFilter($col["field_with"]);
+														echo (CRUDBooster::getTypeFilter($col["field_with"]) == 'between') ? $value[0] : "";
+														?>'>
+                                                    </div>
+                                                </div>
+                                                <div class='col-sm-6'>
+                                                    <div class='input-group {{ ($col["type_data"] == "time")?"bootstrap-timepicker":"" }}'>
+                                                        <span class="input-group-addon">{{trans("crudbooster.filter_to")}}:</span>
+                                                        <input
+                                                                {{ (CRUDBooster::getTypeFilter($col["field_with"]) != 'between')?"disabled":"" }}
+                                                                type='text'
+                                                                class='filter-value-between form-control {{ (in_array($col["type_data"],["date","datetime","timestamp"]))?"datepicker":"timepicker" }}'
+                                                                readonly placeholder='{{$col["label"]}} {{trans("crudbooster.filter_to")}}'
+                                                                name='filter_column[{{$col["field_with"]}}][value][]' value='<?php
+														$value = CRUDBooster::getValueFilter($col["field_with"]);
+														echo (CRUDBooster::getTypeFilter($col["field_with"]) == 'between') ? $value[1] : "";
+														?>'>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!--END COL_SM_6-->
+
+
+                                        <div class='col-sm-2'>
+                                            <select class='form-control' name='filter_column[{{$col["field_with"]}}][sorting]'>
+                                                <option value=''>** Sorting</option>
+                                                <option {{ (CRUDBooster::getSortingFilter($col["field_with"]) == 'asc')?"selected":"" }} value='asc'>{{trans("crudbooster.filter_ascending")}}</option>
+                                                <option {{ (CRUDBooster::getSortingFilter($col["field_with"]) == 'desc')?"selected":"" }} value='desc'>{{trans("crudbooster.filter_descending")}}</option>
+                                            </select>
+                                        </div><!--END_COL_SM_2-->
+
                                     </div>
 
-                                    <div class='col-sm-3'>
-                                        <select name='filter_column[{{$col["field_with"]}}][type]' data-type='{{$col["type_data"]}}'
-                                                class="filter-combo form-control">
-                                            <option value=''>** {{trans("crudbooster.filter_select_operator_type")}}</option>
-                                            @if(in_array($col['type_data'],['string','varchar','text','char']))
-                                                <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'like')?"selected":"" }} value='like'>{{trans("crudbooster.filter_like")}}</option> @endif
-                                            @if(in_array($col['type_data'],['string','varchar','text','char']))
-                                                <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'not like')?"selected":"" }} value='not like'>{{trans("crudbooster.filter_not_like")}}</option>@endif
+                                </div>
+                            @else
+                                <div class='form-group'>
 
-                                            <option typeallow='all'
-                                                    {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '=')?"selected":"" }} value='='>{{trans("crudbooster.filter_equal_to")}}</option>
-                                            @if(in_array($col['type_data'],['int','integer','double','float','decimal','time']))
-                                                <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '>=')?"selected":"" }} value='>='>{{trans("crudbooster.filter_greater_than_or_equal")}}</option>@endif
-                                            @if(in_array($col['type_data'],['int','integer','double','float','decimal','time']))
-                                                <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '<=')?"selected":"" }} value='<='>{{trans("crudbooster.filter_less_than_or_equal")}}</option>@endif
-                                            @if(in_array($col['type_data'],['int','integer','double','float','decimal','time']))
-                                                <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '<')?"selected":"" }} value='<'>{{trans("crudbooster.filter_less_than")}}</option>@endif
-                                            @if(in_array($col['type_data'],['int','integer','double','float','decimal','time']))
-                                                <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '>')?"selected":"" }} value='>'>{{trans("crudbooster.filter_greater_than")}}</option>@endif
-                                            <option typeallow='all'
-                                                    {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '!=')?"selected":"" }} value='!='>{{trans("crudbooster.filter_not_equal_to")}}</option>
-                                            <option typeallow='all'
-                                                    {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'in')?"selected":"" }} value='in'>{{trans("crudbooster.filter_in")}}</option>
-                                            <option typeallow='all'
-                                                    {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'not in')?"selected":"" }} value='not in'>{{trans("crudbooster.filter_not_in")}}</option>
-                                            @if(in_array($col['type_data'],['date','time','datetime','int','integer','double','float','decimal','timestamp']))
-                                                <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'between')?"selected":"" }} value='between'>{{trans("crudbooster.filter_between")}}</option>@endif
-                                            <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'empty')?"selected":"" }} value='empty'>Empty ( or
-                                                Null)
-                                            </option>
-                                        </select>
-                                    </div><!--END COL_SM_4-->
+                                    <div class='row-filter-combo row'>
 
-
-                                    <div class='col-sm-5'>
-                                        <input type='text' class='filter-value form-control'
-                                               style="{{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'between')?"display:none":"display:block"}}"
-                                               disabled name='filter_column[{{$col["field_with"]}}][value]'
-                                               value='{{ (!is_array(CRUDBooster::getValueFilter($col["field_with"])))?CRUDBooster::getValueFilter($col["field_with"]):"" }}'>
-
-                                        <div class='row between-group'
-                                             style="{{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'between')?"display:block":"display:none" }}">
-                                            <div class='col-sm-6'>
-                                                <div class='input-group {{ ($col["type_data"] == "time")?"bootstrap-timepicker":"" }}'>
-                                                    <span class="input-group-addon">{{trans("crudbooster.filter_from")}}:</span>
-                                                    <input
-                                                            {{ (CRUDBooster::getTypeFilter($col["field_with"]) != 'between')?"disabled":"" }}
-                                                            type='text'
-                                                            class='filter-value-between form-control {{ (in_array($col["type_data"],["date","datetime","timestamp"]))?"datepicker":"timepicker" }}'
-                                                            readonly placeholder='{{$col["label"]}} {{trans("crudbooster.filter_from")}}'
-                                                            name='filter_column[{{$col["field_with"]}}][value][]' value='<?php
-                                                    $value = CRUDBooster::getValueFilter($col["field_with"]);
-                                                    echo (CRUDBooster::getTypeFilter($col["field_with"]) == 'between') ? $value[0] : "";
-                                                    ?>'>
-                                                </div>
-                                            </div>
-                                            <div class='col-sm-6'>
-                                                <div class='input-group {{ ($col["type_data"] == "time")?"bootstrap-timepicker":"" }}'>
-                                                    <span class="input-group-addon">{{trans("crudbooster.filter_to")}}:</span>
-                                                    <input
-                                                            {{ (CRUDBooster::getTypeFilter($col["field_with"]) != 'between')?"disabled":"" }}
-                                                            type='text'
-                                                            class='filter-value-between form-control {{ (in_array($col["type_data"],["date","datetime","timestamp"]))?"datepicker":"timepicker" }}'
-                                                            readonly placeholder='{{$col["label"]}} {{trans("crudbooster.filter_to")}}'
-                                                            name='filter_column[{{$col["field_with"]}}][value][]' value='<?php
-                                                    $value = CRUDBooster::getValueFilter($col["field_with"]);
-                                                    echo (CRUDBooster::getTypeFilter($col["field_with"]) == 'between') ? $value[1] : "";
-                                                    ?>'>
-                                                </div>
-                                            </div>
+                                        <div class="col-sm-2">
+                                            <strong>{{$col['label']}}</strong>
                                         </div>
-                                    </div><!--END COL_SM_6-->
 
+                                        <div class='col-sm-3'>
+                                            <select name='filter_column[{{$col["field_with"]}}][type]' data-type='{{$col["type_data"]}}'
+                                                    class="filter-combo form-control">
+                                                <option value=''>** Select from Dropdown</option>
+                                                @foreach($custom_filter as $custom_filter_options_key => $custom_filter_options_value)
+                                                    @if(isset($custom_filter_options_value['value']) || isset($custom_filter_options_value['operator']))
+                                                        <option {{ (CRUDBooster::getSortingFilter($col["field_with"]) == 'desc')?"selected":"" }} value='{{'custom|_|'.$custom_filter_options_value['value'].'|_|'.$custom_filter_options_value['operator']}}'>{{$custom_filter_options_key}}</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div><!--END COL_SM_4-->
 
-                                    <div class='col-sm-2'>
-                                        <select class='form-control' name='filter_column[{{$col["field_with"]}}][sorting]'>
-                                            <option value=''>** Sorting</option>
-                                            <option {{ (CRUDBooster::getSortingFilter($col["field_with"]) == 'asc')?"selected":"" }} value='asc'>{{trans("crudbooster.filter_ascending")}}</option>
-                                            <option {{ (CRUDBooster::getSortingFilter($col["field_with"]) == 'desc')?"selected":"" }} value='desc'>{{trans("crudbooster.filter_descending")}}</option>
-                                        </select>
-                                    </div><!--END_COL_SM_2-->
+                                    </div>
 
                                 </div>
-
-                            </div>
-                            <?php endforeach;?>
+                            @endif
+							<?php endforeach;?>
 
                         </div>
                         <div class="modal-footer" align="right">
@@ -506,17 +541,17 @@ $total = $result->total();
                                         <option <?=($setting->default_paper_size == 'Letter') ? "selected" : ""?> value='Letter'>Letter</option>
                                         <option <?=($setting->default_paper_size == 'Legal') ? "selected" : ""?> value='Legal'>Legal</option>
                                         <option <?=($setting->default_paper_size == 'Ledger') ? "selected" : ""?> value='Ledger'>Ledger</option>
-                                        <?php for($i = 0;$i <= 8;$i++):
-                                        $select = ($setting->default_paper_size == 'A'.$i) ? "selected" : "";
-                                        ?>
+										<?php for($i = 0;$i <= 8;$i++):
+										$select = ($setting->default_paper_size == 'A'.$i) ? "selected" : "";
+										?>
                                         <option <?=$select?> value='A{{$i}}'>A{{$i}}</option>
-                                        <?php endfor;?>
+										<?php endfor;?>
 
-                                        <?php for($i = 0;$i <= 10;$i++):
-                                        $select = ($setting->default_paper_size == 'B'.$i) ? "selected" : "";
-                                        ?>
+										<?php for($i = 0;$i <= 10;$i++):
+										$select = ($setting->default_paper_size == 'B'.$i) ? "selected" : "";
+										?>
                                         <option <?=$select?> value='B{{$i}}'>B{{$i}}</option>
-                                        <?php endfor;?>
+										<?php endfor;?>
                                     </select>
                                     <div class='help-block'><input type='checkbox' name='default_paper_size'
                                                                    value='1'/> {{trans("crudbooster.export_dialog_set_default")}}</div>
