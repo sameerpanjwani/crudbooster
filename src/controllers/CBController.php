@@ -306,7 +306,7 @@ class CBController extends Controller
                 $join_exp = explode(',', $join);
 
                 $join_table = $join_exp[0];
-                $joinTablePK = CB::pk($join_table);
+	            $joinTablePK = !empty($join_column_user) ? $join_column_user : CB::pk($join_table);
                 $join_column = $join_exp[1];
                 $join_alias = str_replace(".", "_", $join_table);
 
