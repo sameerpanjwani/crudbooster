@@ -279,6 +279,9 @@ $total = $result->total();
                         case 'not in':
                             filter_value.prop('disabled', false).attr('placeholder', '{{trans("crudbooster.filter_eg")}} : {{trans("crudbooster.filter_lorem_ipsum_dolor_sit")}}');
                             break;
+                        case 'range':
+                            filter_value.prop('disabled', false).attr('placeholder', '{{trans("crudbooster.filter_eg")}} : Enter the values seperated by comma(5,9)');
+                            break;
                         case 'between':
                             filter_value.val('').hide();
                             p.find('.between-group input').prop('disabled', false);
@@ -350,6 +353,8 @@ $total = $result->total();
                                                     <option {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '>')?"selected":"" }} value='>'>{{trans("crudbooster.filter_greater_than")}}</option>@endif
                                                 <option typeallow='all'
                                                         {{ (CRUDBooster::getTypeFilter($col["field_with"]) == '!=')?"selected":"" }} value='!='>{{trans("crudbooster.filter_not_equal_to")}}</option>
+                                                <option typeallow='all'
+                                                        {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'range')?"selected":"" }} value='range'>{{'Range Between'}}</option>
                                                 <option typeallow='all'
                                                         {{ (CRUDBooster::getTypeFilter($col["field_with"]) == 'in')?"selected":"" }} value='in'>{{trans("crudbooster.filter_in")}}</option>
                                                 <option typeallow='all'
