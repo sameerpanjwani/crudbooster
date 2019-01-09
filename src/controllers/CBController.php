@@ -437,6 +437,14 @@ class CBController extends Controller
 						continue;
 					}
 
+					$greater_than = $lesser_than = '';
+					if ($type == 'range') {
+						//continue;
+						$value = explode(',', $value);
+						$greater_than = isset($value[0]) ? $value[0] : '';
+						$lesser_than = isset($value[1]) ? $value[1] : '';
+					}
+
 					switch ($type) {
 						default:
 							if ($key && $type && $value) {
@@ -468,6 +476,14 @@ class CBController extends Controller
 									}else{
 										$w->where($key, $operator, $value);
 									}
+								}
+							}
+							break;
+							case 'range':
+							if ($value) {
+								if ($key && $greater_than && $lesser_than) {
+									$w->where($key, '>', $greater_than)
+										->where($key, '<', $lesser_than);
 								}
 							}
 							break;
