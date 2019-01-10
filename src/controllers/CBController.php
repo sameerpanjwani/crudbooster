@@ -482,8 +482,8 @@ class CBController extends Controller
 							case 'range':
 							if ($value) {
 								if ($key && $greater_than && $lesser_than) {
-									$w->where($key, '>', $greater_than)
-										->where($key, '<', $lesser_than);
+									$w->where($key, '>=', $greater_than)
+										->where($key, '<=', $lesser_than);
 								}
 							}
 							break;
