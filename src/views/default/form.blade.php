@@ -19,10 +19,11 @@
             </div>
 
             <div class="panel-body" style="padding:20px 0px 0px 0px">
-                <?php
-                $action = (@$row) ? CRUDBooster::mainpath("edit-save/$row->id") : CRUDBooster::mainpath("add-save");
-                $return_url = ($return_url) ?: g('return_url');
-                ?>
+				<?php
+				$primary_key = array_keys(json_decode(json_encode($row), true))[0];
+				$action = (@$row) ? CRUDBooster::mainpath("edit-save/".$row->{$primary_key}) : CRUDBooster::mainpath("add-save");
+				$return_url = ($return_url) ?: g('return_url');
+				?>
                 <form class='form-horizontal' method='post' id="form" enctype="multipart/form-data" action='{{$action}}'>
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type='hidden' name='return_url' value='{{ @$return_url }}'/>
