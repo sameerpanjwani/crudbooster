@@ -20,7 +20,10 @@
 
             <div class="panel-body" style="padding:20px 0px 0px 0px">
 				<?php
-				$primary_key = array_keys(json_decode(json_encode($row), true))[0];
+	            $primary_key = 'id';
+	            if($row){
+		            $primary_key = array_keys(json_decode(json_encode($row), true))[0];
+	            }
 				$action = (@$row) ? CRUDBooster::mainpath("edit-save/".$row->{$primary_key}) : CRUDBooster::mainpath("add-save");
 				$return_url = ($return_url) ?: g('return_url');
 				?>
