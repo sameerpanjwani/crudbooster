@@ -1044,7 +1044,9 @@ class CBController extends Controller
 
 		foreach ($this->data_inputan as $ro) {
 			$name = $ro['name'];
-
+			if(isset($ro['custom']) && $ro['custom']){
+				continue;
+			}
 			if (! $name) {
 				continue;
 			}
