@@ -184,6 +184,7 @@
                         <?php
                         $select_table = explode(',', $form['datatable'])[0];
                         $select_title = explode(',', $form['datatable'])[1];
+                        $select_column = isset(explode(',', $form['datatable'])[2]) ? explode(',', $form['datatable'])[2] : "";
                         $select_where = $form['datatable_where'];
                         $datatable_format = $form['datatable_format'];
                         $select_table_pk = CRUDBooster::findPrimaryKey($select_table);
@@ -201,7 +202,7 @@
 
                         foreach ($result as $r) {
                             $option_label = $r->{$select_title};
-                            $option_value = $r->$select_table_pk;
+                            $option_value = ($select_column) ? $r->{$select_column} : $r->$select_table_pk;
                             $selected = ($option_value == $value) ? "selected" : "";
                             echo "<option $selected value='$option_value'>$option_label</option>";
                         }
