@@ -599,7 +599,7 @@ class CBController extends Controller
 
 				if (isset($col['image'])) {
 					if ($value == '') {
-						$value = "<a  data-lightbox='roadtrip' rel='group_{{$table}}' title='$label: $title' href='".asset('vendor/crudbooster/pina.png')."'><img width='40px' height='40px' src='".asset('vendor/crudbooster/pina.png')."'/></a>";
+						$value = "<a  data-lightbox='roadtrip' rel='group_{{$table}}' title='$label: $title' href='https://indef.s3.ap-south-1.amazonaws.com/product_image_not_available.png'><img width='40px' height='40px' src='https://indef.s3.ap-south-1.amazonaws.com/product_image_not_available.png'/></a>";
 					} else {
 						$pic = (strpos($value, 'http://') !== false) ? $value : asset($value);
 						$value = "<a data-lightbox='roadtrip'  rel='group_{{$table}}' title='$label: $title' href='".$pic."'><img width='40px' height='40px' src='".$pic."'/></a>";
